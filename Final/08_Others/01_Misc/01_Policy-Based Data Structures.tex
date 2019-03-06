@@ -1,0 +1,24 @@
+\paragraph{红黑树}
+\subparagraph{声明/头文件}
+\begin{lstlisting}
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace __gnu_pbds;
+typedef tree<pt, null_type, less<pt>, rb_tree_tag, tree_order_statistics_node_update> rbtree;
+\end{lstlisting}
+\subparagraph{使用方法}
+\begin{lstlisting}
+pt                                 // 关键字类型
+null_type                          // 无映射(低版本g++为null_mapped_type)
+less<int>                          // 从小到大排序
+rb_tree_tag                        // 红黑树（splay_tree_tag）
+tree_order_statistics_node_update  // 结点更新
+T.insert(val);                     // 插入
+T.erase(iterator);                 // 删除
+T.order_of_key();                  // 查找有多少数比它小
+T.find_by_order(k);                // 有k个数比它小的数是多少
+a.join(b);                         // b并入a 前提是两棵树的key的取值范围不相交
+a.split(v, b);                     // key小于等于v的元素属于a，其余的属于b
+T.lower_bound(x);                  // >=x的min的迭代器
+T.upper_bound((x);                 // >x的min的迭代器
+\end{lstlisting}
