@@ -1,0 +1,28 @@
+\begin{itemize}
+\item  基本概念:
+    \begin{itemize}
+    \item 欧拉图: 能够没有重复地一次遍历所有边的图。（必须是连通图）
+    \item 欧拉路: 上述遍历的路径就是欧拉路。
+    \item 欧拉回路: 若欧拉路是闭合的（一个圈，从起点开始遍历最终又回到起点），则为欧拉回路。
+    \end{itemize}
+\item 无向图G有欧拉路径的充要条件
+    \begin{itemize}
+    \item G是连通图
+    \item G中奇顶点（连接边的数量为奇数）的数量等于0或2.
+    \end{itemize}
+\item 无向图G有欧拉回路的充要条件
+    \begin{itemize}
+    \item G是连通图
+    \item G中每个顶点都是偶顶点
+    \end{itemize}
+\item 有向图G有欧拉路径的充要条件
+    \begin{itemize}
+    \item G是连通图
+    \item u的出度比入度大1，v的出度比入度小1，其他所有点出度和入度相同。（u为起点，v为终点）
+    \end{itemize}
+\item 有向图G有欧拉回路的充要条件
+    \begin{itemize}
+    \item G是连通图
+    \item G中每个顶点的出度等于入度
+    \end{itemize}
+\end{itemize}

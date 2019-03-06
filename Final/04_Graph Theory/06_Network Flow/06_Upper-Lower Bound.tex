@@ -1,0 +1,77 @@
+\textbf{上下界网络流建图方法}
+\subsubsection*{记号说明}
+\begin{itemize}
+\item $f(u,v)$表示$u \rightarrow v$的实际流量
+\item $b(u,v)$表示$u \rightarrow v$的流量下界
+\item $c(u,v)$表示$u \rightarrow v$的流量上界
+\end{itemize}
+
+\subsubsection*{无源汇可行流}
+\paragraph{建图}
+\begin{itemize}
+\item 新建附加源点$S$和$T$
+\item 原图中的边$u \rightarrow v$，限制为$[b,c]$，建边$u \rightarrow v$，容量为$c-b$
+\item 记$d(i) = \sum b(u,i) - \sum b(i,v) $
+\item 若$d(i)>0$，建边$S \rightarrow i$，流量为$d(i)$
+\item 若$d(i)<0$，建边$i \rightarrow T$，流量为$-d(i)$
+\end{itemize}
+
+\paragraph{求解}
+\begin{itemize}
+\item 跑$S \rightarrow T$的最大流，如果满流，则原图存在可行流。
+\item 此时，原图中每一条边的流量为新图中对应边的流量加上这条边的下界。
+\end{itemize}
+
+\subsubsection*{有源汇可行流}
+\paragraph{建图}
+\begin{itemize}
+\item 在原图中建边$t \rightarrow s$，流量限制为$[0,+\infty)$，这样就改造成了无源汇的网络流图。
+\item 之后就可以像求解无源汇可行流一样建图了。
+\end{itemize}
+
+\paragraph{求解} 同无源汇可行流
+
+\subsubsection*{有源汇最大流}
+\paragraph{建图} 同有源汇可行流
+\paragraph{求解}
+\begin{itemize}
+\item 先跑一遍$S \rightarrow T$的最大流，求出可行流
+\item 记此时$\sum f(s,i) = sum_1$
+\item 将$t \rightarrow s$这条边拆掉，在新图上跑$s \rightarrow t$的最大流
+\item 记此时$\sum f(s,i) = sum_2$
+\item 最终答案即为$sum_1 + sum_2$
+\end{itemize}
+
+\subsubsection*{有源汇最小流}
+\paragraph{建图} 同无源汇可行流
+\paragraph{求解}
+\begin{itemize}
+\item 求$S \rightarrow T$最大流
+\item 建边$t \rightarrow s$，容量为$+\infty$
+\item 再跑一遍$S \rightarrow T$的最大流，答案即为$f(t,s)$
+\end{itemize}
+
+\textbf{有源汇的最大流和最小流也可以通过二分答案求得，\\即二分$t \rightarrow s$的下界（最大流）和上界（最小流）复杂度多了个$O(\log n)$这里不再赘述。}
+
+\paragraph{蓝书上的做法}
+\begin{itemize}
+\item 先用无源汇可行流建图的方法求出可行流，然后用传统$s-t$增广路算法即可得到最大流。把$t$看成源点，$s$看成汇点后求出的$t-s$最大流就是最小流。
+\item 注意：原先每条弧$u \rightarrow v$的反向弧容量为$0$，而在有容量下界的情形中，反向弧的容量应该等于流量下界。
+\end{itemize}
+
+\subsubsection*{有源汇费用流}
+\paragraph{建图}
+\begin{itemize}
+\item 新建附加源点$S$和$T$
+\item 原图中的边$u \rightarrow v$，限制为$[b,c]$，费用为$cost$，建边$u \rightarrow v$，容量为$c-b$，费用为$cost$
+\item 记$d(i) = \sum b(u,i) - \sum b(i,v) $
+\item 若$d(i)>0$，建边$S \rightarrow i$，流量为$d(i)$，\textbf{费用为$0$}
+\item 若$d(i)<0$，建边$i \rightarrow T$，流量为$-d(i)$，\textbf{费用为$0$}
+\item 建边$t \rightarrow s$，流量为$+\infty$，费用为$0$。
+\end{itemize}
+
+\paragraph{求解}
+\begin{itemize}
+\item 跑$S \rightarrow T$的最小费用最大流
+\item 答案为求出的费用加上原图中边的下界乘以边的费用
+\end{itemize}
